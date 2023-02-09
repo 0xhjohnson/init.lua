@@ -2,7 +2,7 @@
 
 ### Prerequisite
 
-- install [ripgrep](https://github.com/BurntSushi/ripgrep#installation) so [telescope](https://github.com/nvim-telescope/telescope.nvim) works properly
+- install [ripgrep](https://github.com/BurntSushi/ripgrep#installation) and [fd](https://github.com/sharkdp/fd) so [telescope](https://github.com/nvim-telescope/telescope.nvim) works properly
 - ensure that font supports icons (dank mono patched using [nerd fonts](https://github.com/ryanoasis/nerd-fonts) is my choice)
 - install node ([fnm](https://github.com/Schniz/fnm) is what i use)
 - ensure [mason](https://github.com/williamboman/mason.nvim#requirements) requirements are met
