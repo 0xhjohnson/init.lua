@@ -7,4 +7,4 @@
 - install node ([fnm](https://github.com/Schniz/fnm) is what i use)
 - ensure [mason](https://github.com/williamboman/mason.nvim#requirements) requirements are met
 
-This config is tailored to fit my needs and probs isn't for everyone. Starts in 40ms if you are a nerd that cares about stuff like that.
+This config is tailored to fit my needs and probs isn't for everyone. Starts in 36ms if you are a nerd that cares about stuff like that.

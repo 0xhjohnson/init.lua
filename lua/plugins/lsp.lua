@@ -29,7 +29,7 @@ return {
 
 		lsp.ensure_installed({
 			"tsserver",
-			"sumneko_lua",
+			"lua_ls",
 			"rust_analyzer",
 			"html",
 			"cssls",
@@ -44,18 +44,35 @@ return {
 		})
 
 		lsp.on_attach(function(client, bufnr)
-			local opts = { buffer = bufnr, remap = false }
+			function optsWithDesc(desc)
+				return {
+					buffer = bufnr,
+					remap = false,
+					desc = desc
+				}
+			end
 
-			vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-			vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-			vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-			vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-			vim.keymap.set("n", "go", function() vim.lsp.buf.type_definition() end, opts)
-			vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
-			vim.keymap.set("n", "<leader>v", function() vim.lsp.buf.signature_help() end, opts)
-			vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-			vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
-			vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format() end, opts)
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, optsWithDesc("Hover"))
+			vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", optsWithDesc("Goto Definition"))
+			vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", optsWithDesc("References"))
+			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, optsWithDesc("Goto Declaration"))
+			vim.keymap.set("n", "gI", "<cmd>Telescope lsp_implementations<cr>", optsWithDesc("Goto Implementation"))
+			vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<cr>", optsWithDesc("Goto Type Definition"))
+			vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, optsWithDesc("Signature Help"))
+			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, optsWithDesc("Next Diagnostic"))
+			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, optsWithDesc("Prev Diagnostic"))
+			vim.keymap.set("n", "]e", function() vim.diagnostic.goto_next({ severity = "ERROR" }) end,
+				optsWithDesc("Next Error"))
+			vim.keymap.set("n", "[e", function() vim.diagnostic.goto_prev({ severity = "ERROR" }) end,
+				optsWithDesc("Prev Error"))
+			vim.keymap.set("n", "]w", function() vim.diagnostic.goto_next({ severity = "WARN" }) end,
+				optsWithDesc("Next Warning"))
+			vim.keymap.set("n", "[w", function() vim.diagnostic.goto_prev({ severity = "WARN" }) end,
+				optsWithDesc("Prev Warning"))
+			vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, optsWithDesc("Line Diagnostic"))
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, optsWithDesc("Code Action"))
+			vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, optsWithDesc("Rename"))
+			vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, optsWithDesc("Format Document"))
 
 			lsp_group = vim.api.nvim_create_augroup("LSP", { clear = true })
 			vim.api.nvim_create_autocmd(
