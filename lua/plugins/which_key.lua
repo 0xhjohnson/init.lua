@@ -8,7 +8,7 @@ return {
 		wk.setup({})
 		wk.register({
 			["g"] = { name = "+goto" },
-			["gz"] = { name = "+surround" },
+			["gs"] = { name = "+surround" },
 			["]"] = { name = "+next" },
 			["["] = { name = "+prev" },
 			["<leader>c"] = { name = "+code" },
