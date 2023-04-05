@@ -36,13 +36,13 @@ return {
 				selection_caret = " ",
 				mappings = {
 					i = {
-						["<c-t>"] = function(...)
+							["<c-t>"] = function(...)
 							return require("trouble.providers.telescope").open_with_trouble(...)
 						end,
-						["<C-Down>"] = function(...)
+							["<C-Down>"] = function(...)
 							return require("telescope.actions").cycle_history_next(...)
 						end,
-						["<C-Up>"] = function(...)
+							["<C-Up>"] = function(...)
 							return require("telescope.actions").cycle_history_prev(...)
 						end,
 					},
@@ -54,5 +54,9 @@ return {
 				},
 			},
 		},
+		config = function(_, opts)
+			require("telescope").setup(opts)
+			require("telescope").load_extension "file_browser"
+		end,
 	},
 }
