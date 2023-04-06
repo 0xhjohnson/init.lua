@@ -90,11 +90,7 @@ return {
 			vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, optsWithDesc("Rename"))
 			vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, optsWithDesc("Format Document"))
 
-			lsp_group = vim.api.nvim_create_augroup("LSP", { clear = true })
-			vim.api.nvim_create_autocmd(
-				{ "BufWritePre" },
-				{ callback = function() vim.lsp.buf.format() end, group = lsp_group }
-			)
+			lsp.buffer_autoformat()
 		end)
 
 		lsp.nvim_workspace()
