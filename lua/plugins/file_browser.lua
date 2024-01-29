@@ -1,7 +1,11 @@
 return {
-	"nvim-telescope/telescope-file-browser.nvim",
-	dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+	"simonmclean/triptych.nvim",
+	dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+	event = 'VeryLazy',
 	keys = {
-		{ "<leader>fe", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", desc = "File Explorer" },
+		{ "<leader>-", "<cmd>:Triptych<cr>", desc = "File Explorer" },
 	},
+	config = function()
+		require("triptych").setup()
+	end
 }
