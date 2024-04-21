@@ -18,3 +18,12 @@ vim.opt.updatetime = 250
 vim.opt.termguicolors = true
 vim.opt.colorcolumn = "80"
 vim.opt.wrap = false
+
+-- Hide banner
+vim.g.netrw_banner = 0
+-- Tree style view
+vim.g.netrw_liststyle = 3
+-- Hide based on .gitignore
+vim.g.netrw_list_hide = (vim.fn["netrw_gitignore#Hide"]()) .. [[,\(^\|\s\s\)\zs\.\S\+]]
+-- Open with right split
+vim.g.netrw_altv = 1
